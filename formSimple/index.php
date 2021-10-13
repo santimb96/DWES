@@ -7,20 +7,18 @@
 <body>
 
 <?php
-//type your code here
 
+if($_GET["submit"] && !empty($_GET["submit"]) !== null){
+    isEmpty();
+}
 
-function isEmpty()
-{
-    if ($_GET["submit"] && !empty($_GET["submit"]) !== null) {
+function isEmpty(){
         $nombre = $_GET["nombre"];
         $edad = $_GET["edad"];
         $correo = $_GET["correo"];
 
         echo $nombre." ,". $edad. " ," .$correo;
     }
-}
-isEmpty();
 ?>
 <div>
     <form>
