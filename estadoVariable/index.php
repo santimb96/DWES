@@ -1,18 +1,11 @@
 <?php
 
-$var="";
-define("VALUES", array(null, 0, true, false, "0", "", "foo", array(), "unset" => call_user_func(function () use ($var){
-    unset($var);
-    if(isset($var)){
-        return "true";
-    }
-    return "false";
-})));
+const HEADERS = array('Contenido de $var', 'isset($var)', 'empty($var)', '(bool)($var)');
+const WAYS = array('$var = null', '$var = 0', '$var = true', '$var = false', '$var = 0', '$var = ""', '$var = foo', '$var = array()', 'unset($var)');
+define("VALUES", array(null, 0, true, false, "0", "", "foo", array(), $var));
+unset($var);
 
-var_dump(VALUES['unset']);
-
-
-static $render = "<table>";
+$render = "<table style=' border: 1px solid black;'>";
 
 
 $is_set = function ($var) {
@@ -35,20 +28,20 @@ $is_boolean = function ($var) {
     }
         return "false";
 };
-$is_unset = function ($var) {
-    unset($var);
-    if(isset($var)){
-        return "true";
-    }
-    return "false";
-};
 
-for ($i = 0; $i < count(VALUES); $i++) {
-    $render .= "<tr style='border: black 1px solid;'><td>" . $is_set(VALUES[$i]) . "</td>" .
-        "<td>" . $is_empty(VALUES[$i]) . "</td>" .
-        "<td>" . $is_boolean(VALUES[$i]) . "</td></tr>";
+$render .= "<tr>";
+for ($j = 0; $j < count(HEADERS); $j++){
+    $render .= "<th style=' border: 1px solid black;'>" . HEADERS[$j] . "</th>";
+
 }
-//$render .= "<td>" .$is_unset($GLOBALS["var"]). "</td></tr>";
+$render .= "</tr>";
+for ($i = 0; $i < count(VALUES); $i++) {
+
+    $render .= "<tr><td style=' border: 1px solid black;'>" . WAYS[$i] . "</td>" .
+        "<td style=' border: 1px solid black;'>" . $is_set(VALUES[$i]) . "</td>".
+        "<td style=' border: 1px solid black;'>" . $is_empty(VALUES[$i]) . "</td>" .
+        "<td style=' border: 1px solid black;'>" . $is_boolean(VALUES[$i]) . "</td></tr>";
+}
 
 $render .= "</table>";
 
