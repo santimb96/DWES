@@ -6,19 +6,24 @@
 </head>
 <body>
 
+
 <?php
-
-if($_GET["submit"] && !empty($_GET["submit"]) !== null){
-    isEmpty();
-}
-
-function isEmpty(){
+if (!isset($_GET["submit"])) {
+    echo "";
+} else {
+    if ($_GET["submit"] && !empty($_GET["submit"]) !== null) {
         $nombre = $_GET["nombre"];
         $edad = $_GET["edad"];
         $correo = $_GET["correo"];
-
-        echo $nombre." ,". $edad. " ," .$correo;
+        printData($nombre, $edad, $correo);
     }
+}
+
+function printData($nombre, $edad, $correo)
+{
+    echo $nombre . " ," . $edad . " ," . $correo;
+}
+
 ?>
 <div>
     <form>
