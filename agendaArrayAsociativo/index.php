@@ -1,12 +1,29 @@
+<?php
+/**
+ * @author smartinez@cifpfbmoll.eu
+ * @version 1.0.0
+ */
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Contacts 2021/22</title>
     <style>
-        body{
+        /**
+        Algunos estilos basicos para la agenda mediante CSS
+         */
+        body {
             color: white;
             background: black;
+        }
+
+        .error {
+            background: darkred;
+            border-radius: 20px;
+            font-weight: bold;
+            width: 20%;
+            padding: 5px;
         }
     </style>
 </head>
@@ -24,6 +41,7 @@ $data = [];
  */
 if (isset($_GET["submit"]) === true) {
     /**
+     * @var "$name", @var $data, @var tlf:
      * para evitar error de contacto no definido tras el primer submit (el array del hidden esta vacio), asigno
      * un array temporal mediante la condicion !isset (si no existe aun $_GET["contact"])
      */
@@ -33,23 +51,27 @@ if (isset($_GET["submit"]) === true) {
     } else {
         $data = $_GET["contact"]; //cogemos todos los valores de contact[]
     }
-
-    $name = $_GET["name"]; //cogemos el valor de nombre
-    $tlf = $_GET["tlf"]; //cogemos el valor del telefono
-    /**
-     * valoramos si el tlf esta vacio para poder poder borrar así su correspiendiente contacto
-     */
-    if ($tlf[0] === "") {
-        foreach ($data as $data_name => $data_tlf) {
-            if ($name[0] === $data_name) {
-                unset($data[$data_name]);
-                break;
-            }
-        }
+    if ($_GET["name"][0] === "") {
+        echo "<h3 class='error'>No has escrito ningún nombre!</h3>";
     } else {
-        $data = keyValue($data, $name, $tlf);
-    }
 
+
+        $name = $_GET["name"]; //cogemos el valor de nombre
+        $tlf = $_GET["tlf"]; //cogemos el valor del telefono
+        /**
+         * valoramos si el tlf esta vacio para poder poder borrar así su correspiendiente contacto
+         */
+        if ($tlf[0] === "") {
+            foreach ($data as $data_name => $data_tlf) {
+                if ($name[0] === $data_name) {
+                    unset($data[$data_name]);
+                    break;
+                }
+            }
+        } else {
+            $data = keyValue($data, $name, $tlf);
+        }
+    }
 } else {
     echo "";
 }
