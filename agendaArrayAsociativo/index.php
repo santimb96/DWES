@@ -16,6 +16,7 @@
         body {
             color: white;
             background: black;
+            font-family: monospace, sans-serif;
         }
 
         .error {
@@ -24,6 +25,14 @@
             font-weight: bold;
             width: 20%;
             padding: 5px;
+        }
+        .button{
+            background: dimgrey;
+            border-radius: 10px;
+            color: white;
+        }
+        .button:hover{
+            background: grey;
         }
     </style>
 </head>
@@ -81,7 +90,7 @@ if (isset($_GET["submit"]) === true) {
 
 <h1>CONTACTS 2021/22</h1>
 <form>
-    NAME:<input name="name[]" type="text"/>
+    NAME: <input name="name[]" type="text"/>
     TLF: <input name="tlf[]" type="text"/>
     <?php
     /**
@@ -89,7 +98,7 @@ if (isset($_GET["submit"]) === true) {
      */
     dataInput($data);
     ?>
-    <input type="submit" name="submit" value="Submit!"/>
+    <input class="button" type="submit" name="submit" value="Submit!"/>
 </form>
 <h2>CONTACTS:</h2>
 
