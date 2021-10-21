@@ -22,7 +22,7 @@ pintarNumeros($numeros, $arr_print);
  * @param $arr_print string le pasamos el mensaje para que concatene valores
  */
 
-function pintarNumeros($numeros, $arr_print)
+function pintarNumeros(array $numeros, string $arr_print)
 {
     foreach ($numeros as $numero) {
         $arr_print .= $numero . ", ";
